@@ -11,6 +11,7 @@ import { SigmaEdge, SigmaNode } from '../../model/SigmaModel';
 import routerImg from '../../assets/img/router.svg';
 import routerHighlightedImg from '../../assets/img/router-highlighted.svg';
 
+
 type NetworkGraphProps = {
   pathHighlighted: boolean;
 };
@@ -21,14 +22,18 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
   const [graphRef, setGraphRef] = useState<React.RefObject<HTMLDivElement>>();
   const [renderer, setRenderer] = useState<Sigma>();
   const [path, setPath] = useState<Path>();
+  const [nodes, setNodes] = useState<Node[]>([]);
+
 
   useEffect(() => {
     setGraphRef(React.createRef<HTMLDivElement>());
   }, []);
 
   useEffect(() => {
-    drawGraph();
-  }, [graphRef, path]);
+    if (nodes?.length !== 0) {
+      drawGraph();
+    }
+  }, [graphRef, path, nodes]);
 
   useEffect(() => {
     if (pathHighlighted) {
@@ -37,6 +42,14 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
       setPath(undefined);
     }
   }, [pathHighlighted]);
+
+  useEffect(() => {
+    fetchNodes().then(result => {
+      setNodes(result)
+    });
+  }, []);
+
+
 
   const getPath = (): Path => {
     return fetchPath();
@@ -59,8 +72,9 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
       labelColor: { color: '#2b2c30' },
     };
 
-    const nodes = fetchNodes();
+
     const edges = fetchEdges();
+
 
     const sigmaNodes = convertToSigmaNodes(nodes);
     const sigmaEdges = convertToSigmaEdges(edges);
@@ -80,7 +94,6 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
 
   const convertToSigmaNodes = (nodes: Node[]): SigmaNode[] => {
     const sigmaNodes = new Array<SigmaNode>();
-
     nodes.forEach((node) => {
       const sigmaNode: SigmaNode = {
         key: node.key,
