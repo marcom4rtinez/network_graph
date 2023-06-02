@@ -1,6 +1,6 @@
 {
-  "short_name": "SigmaJs Demo - React",
-  "name": "SigmaJS Demo Application (React)",
+  "short_name": "Network Graph Visualizer",
+  "name": "Network Graph Visualizer",
   "icons": [
     {
       "src": "favicon.ico",

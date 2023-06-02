@@ -1,6 +1,6 @@
 {
-  "name": "react-sigmajs-demo",
-  "description": "A simple React application to demonstrate the use of SigmaJS.",
+  "name": "network-graph-visualizer",
+  "description": "Network Graph Visualizer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
