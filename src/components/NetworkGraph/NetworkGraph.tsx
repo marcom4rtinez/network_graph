@@ -36,7 +36,7 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
     if (nodes?.length !== 0) {
       drawGraph();
     }
-  }, [graphRef, path, sigmaNodes]);
+  }, [graphRef, path, sigmaNodes, sigmaEdges]);
 
   useEffect(() => {
     if (pathHighlighted) {
@@ -49,6 +49,9 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
   useEffect(() => {
     fetchNodes().then(result => {
       setNodes(result)
+      fetchEdges().then(result => {
+        setEdges(result)
+      });
     });
   }, []);
 
@@ -56,11 +59,6 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
     setSigmaNodes(convertToSigmaNodes(nodes));
   }, [nodes]);
 
-  useEffect(() => {
-    fetchEdges().then(result => {
-      setEdges(result)
-    });
-  }, []);
 
   useEffect(() => {
     setSigmaEdges(convertToSigmaEdges(edges));
@@ -108,8 +106,8 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
       const sigmaNode: SigmaNode = {
         key: node.key,
         label: node.name,
-        x: Math.random(),
-        y: Math.random(),
+        x: Math.random() * 100,
+        y: Math.random() * 100,
         size: 30,
         type: 'image',
         image: routerImg,
