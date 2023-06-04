@@ -1,6 +1,6 @@
 import { Node, Edge, Path } from '../model/DbModel';
 
-import { edges, path } from './data';
+import { path } from './data';
 
 export async function fetchNodes(): Promise<Node[]> {
   const url = 'http://localhost:8080/getNodes';
@@ -15,7 +15,7 @@ export async function fetchNodes(): Promise<Node[]> {
     const data = await response.json();
 
     data.forEach((x: any) => {
-      nodes.push({ key: `key-${x.name.toLowerCase()}`, name: x.name });
+      nodes.push({ key: x.key, name: x.name });
     });
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error);
@@ -25,8 +25,25 @@ export async function fetchNodes(): Promise<Node[]> {
 };
 
 
-export const fetchEdges = (): Edge[] => {
-  // TODO: Fetch Edges from your API
+export async function fetchEdges(): Promise<Edge[]> {
+  const url = 'http://localhost:8080/getLinks';
+  const edges: Edge[] = []
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    data.forEach((x: any) => {
+      edges.push({ key: x.from + x.to, fromNodeKey: x.from, toNodeKey: x.to });
+    });
+  } catch (error) {
+    console.error('There has been a problem with your fetch operation:', error);
+  }
+
   return edges;
 };
 

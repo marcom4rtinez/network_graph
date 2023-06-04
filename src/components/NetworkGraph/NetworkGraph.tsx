@@ -23,6 +23,9 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
   const [renderer, setRenderer] = useState<Sigma>();
   const [path, setPath] = useState<Path>();
   const [nodes, setNodes] = useState<Node[]>([]);
+  const [sigmaNodes, setSigmaNodes] = useState<SigmaNode[]>([]);
+  const [edges, setEdges] = useState<Edge[]>([]);
+  const [sigmaEdges, setSigmaEdges] = useState<SigmaEdge[]>([]);
 
 
   useEffect(() => {
@@ -33,7 +36,7 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
     if (nodes?.length !== 0) {
       drawGraph();
     }
-  }, [graphRef, path, nodes]);
+  }, [graphRef, path, sigmaNodes]);
 
   useEffect(() => {
     if (pathHighlighted) {
@@ -48,6 +51,20 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
       setNodes(result)
     });
   }, []);
+
+  useEffect(() => {
+    setSigmaNodes(convertToSigmaNodes(nodes));
+  }, [nodes]);
+
+  useEffect(() => {
+    fetchEdges().then(result => {
+      setEdges(result)
+    });
+  }, []);
+
+  useEffect(() => {
+    setSigmaEdges(convertToSigmaEdges(edges));
+  }, [edges]);
 
 
 
@@ -71,13 +88,6 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
       },
       labelColor: { color: '#2b2c30' },
     };
-
-
-    const edges = fetchEdges();
-
-
-    const sigmaNodes = convertToSigmaNodes(nodes);
-    const sigmaEdges = convertToSigmaEdges(edges);
 
     addNodesToGraph(graph, sigmaNodes);
     addEdgesToGraph(graph, sigmaEdges);
