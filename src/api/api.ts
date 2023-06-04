@@ -2,11 +2,13 @@ import { Node, Edge, Path } from '../model/DbModel';
 
 import { path } from './data';
 
+const url = "http://localhost:8080/"
+
 export async function fetchNodes(): Promise<Node[]> {
-  const url = 'http://localhost:8080/getNodes';
+  const endpoint = 'getNodes';
   const nodes: Node[] = []
   try {
-    const response = await fetch(url);
+    const response = await fetch(url + endpoint);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -26,10 +28,10 @@ export async function fetchNodes(): Promise<Node[]> {
 
 
 export async function fetchEdges(): Promise<Edge[]> {
-  const url = 'http://localhost:8080/getLinks';
+  const endpoint = 'getLinks';
   const edges: Edge[] = []
   try {
-    const response = await fetch(url);
+    const response = await fetch(url + endpoint);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

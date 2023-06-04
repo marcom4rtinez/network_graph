@@ -5,7 +5,7 @@ import './NetworkGraph.scss';
 import getNodeProgramImage from 'sigma/rendering/webgl/programs/node.image';
 import { Settings } from 'sigma/settings';
 
-import { fetchEdges, fetchNodes, fetchPath } from '../../api/FakeApi';
+import { fetchEdges, fetchNodes, fetchPath } from '../../api/api';
 import { Node, Edge, Path } from '../../model/DbModel';
 import { SigmaEdge, SigmaNode } from '../../model/SigmaModel';
 import routerImg from '../../assets/img/router.svg';
