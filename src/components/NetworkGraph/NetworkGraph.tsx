@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import './NetworkGraph.scss';
 import getNodeProgramImage from 'sigma/rendering/webgl/programs/node.image';
 import { Settings } from 'sigma/settings';
+import forceAtlas2 from "graphology-layout-forceatlas2";
 
 import { fetchEdges, fetchNodes, fetchPath } from '../../api/api';
 import { Node, Edge, Path } from '../../model/DbModel';
@@ -90,7 +91,9 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
     addNodesToGraph(graph, sigmaNodes);
     addEdgesToGraph(graph, sigmaEdges);
 
+    forceAtlas2.assign(graph, 600);
     const sigmaRenderer = new Sigma(graph, container, settings);
+
     setRenderer(sigmaRenderer);
   };
 

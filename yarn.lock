@@ -4626,6 +4626,13 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, 
   resolved "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.9.tgz"
   integrity sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==
 
+graphology-layout-forceatlas2@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.npmjs.org/graphology-layout-forceatlas2/-/graphology-layout-forceatlas2-0.10.1.tgz"
+  integrity sha512-ogzBeF1FvWzjkikrIFwxhlZXvD2+wlY54lqhsrWprcdPjopM2J9HoMweUmIgwaTvY4bUYVimpSsOdvDv1gPRFQ==
+  dependencies:
+    graphology-utils "^2.1.0"
+
 graphology-layout-noverlap@^0.4.2:
   version "0.4.2"
   resolved "https://registry.npmjs.org/graphology-layout-noverlap/-/graphology-layout-noverlap-0.4.2.tgz"
@@ -4638,7 +4645,7 @@ graphology-types@^0.24.3, graphology-types@>=0.19.0, graphology-types@>=0.23.0, 
   resolved "https://registry.npmjs.org/graphology-types/-/graphology-types-0.24.3.tgz"
   integrity sha512-yn+NgOd/V8dWtHlxRlh0aEx3jp5IXSl8gsQPc3lYmJEZGg9C3oXlZIurHnn7FO3Xav55ehdD7OU7oznfgE2Wyg==
 
-graphology-utils@^2.3.0, graphology-utils@^2.5.0:
+graphology-utils@^2.1.0, graphology-utils@^2.3.0, graphology-utils@^2.5.0:
   version "2.5.1"
   resolved "https://registry.npmjs.org/graphology-utils/-/graphology-utils-2.5.1.tgz"
   integrity sha512-N6zjqvBHgJvulYnwdDgdJoeuhKXZBNm1zedC2asdN+rexfbJylhey/PVT8Bwr8B1aVxKuK+zQqMbQ50kKikjew==
