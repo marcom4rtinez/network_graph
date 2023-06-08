@@ -1,6 +1,6 @@
 import { MultiGraph } from 'graphology';
 import { Sigma } from 'sigma';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './NetworkGraph.scss';
 import getNodeProgramImage from 'sigma/rendering/webgl/programs/node.image';
 import { Settings } from 'sigma/settings';
@@ -27,7 +27,8 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
   const [sigmaNodes, setSigmaNodes] = useState<SigmaNode[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
   const [sigmaEdges, setSigmaEdges] = useState<SigmaEdge[]>([]);
-
+  const nodesRef = useRef<Node[]>();
+  const edgesRef = useRef<Edge[]>();
 
   useEffect(() => {
     setGraphRef(React.createRef<HTMLDivElement>());
@@ -49,11 +50,34 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
 
   useEffect(() => {
     fetchNodes().then(result => {
-      setNodes(result)
+      setNodes(result);
+      nodesRef.current = result;
       fetchEdges().then(result => {
-        setEdges(result)
+        setEdges(result);
+        edgesRef.current = result;
       });
     });
+  }, []);
+
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      fetchNodes().then(result => {
+        if (JSON.stringify(result) !== JSON.stringify(nodesRef.current)) {
+          nodesRef.current = result;
+          setNodes(result);
+        }
+        fetchEdges().then(result => {
+          if (JSON.stringify(result) !== JSON.stringify(edgesRef.current)) {
+            edgesRef.current = result;
+            setEdges(result);
+          }
+        });
+      });
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+
   }, []);
 
   useEffect(() => {
@@ -64,7 +88,6 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
   useEffect(() => {
     setSigmaEdges(convertToSigmaEdges(edges));
   }, [edges]);
-
 
 
   const getPath = (): Path => {
@@ -109,8 +132,8 @@ const NetworkGraph = (props: NetworkGraphProps): JSX.Element => {
       const sigmaNode: SigmaNode = {
         key: node.key,
         label: node.name,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
+        x: Math.random(),
+        y: Math.random(),
         size: 30,
         type: 'image',
         image: routerImg,
