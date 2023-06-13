@@ -27,10 +27,10 @@ npm install
 npm start
 ```
 
-Make sure to set the API address in configs/config.ts
+Make sure to set the API address in `src/configs/config.ts`
 
 ## Configuration
 
-Make sure to configure the Frontend under `configs/config.ts`
+Make sure to configure the Frontend under `src/configs/config.ts`
 
 

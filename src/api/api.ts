@@ -1,5 +1,5 @@
 import { Node, Edge, Path } from '../model/DbModel';
-import { apiEndpoint } from '../../configs/config'
+import { apiEndpoint } from '../configs/config'
 
 
 export async function fetchNodes(): Promise<Node[]> {
