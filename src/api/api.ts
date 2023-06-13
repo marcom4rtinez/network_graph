@@ -1,14 +1,12 @@
 import { Node, Edge, Path } from '../model/DbModel';
 
-import { path } from './data';
-
-const url = "http://localhost:8080/"
+const apiEndpoint = "http://localhost:8080/"
 
 export async function fetchNodes(): Promise<Node[]> {
   const endpoint = 'getNodes';
   const nodes: Node[] = []
   try {
-    const response = await fetch(url + endpoint);
+    const response = await fetch(apiEndpoint + endpoint);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -31,7 +29,7 @@ export async function fetchEdges(): Promise<Edge[]> {
   const endpoint = 'getLinks';
   const edges: Edge[] = []
   try {
-    const response = await fetch(url + endpoint);
+    const response = await fetch(apiEndpoint + endpoint);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -49,7 +47,18 @@ export async function fetchEdges(): Promise<Edge[]> {
   return edges;
 };
 
+
+// This is for future use of highlight path
+const path: Path = {
+  nodes: [],
+  edges: [],
+  // nodes: ['key-xr-4', 'key-xr-1', 'key-xr-2'],
+  // edges: ['key-edge-3', 'key-edge-1'],
+};
+
 export const fetchPath = (): Path => {
   // TODO: Fetch Path from your API
   return path;
 };
+
+

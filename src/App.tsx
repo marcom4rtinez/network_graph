@@ -16,10 +16,10 @@ function App(): JSX.Element {
   return (
     <div className="App">
       <Header />
-      <Controls
+      {/* <Controls
         pathHighlighted={pathHighlighted}
         onPathHighlightingChanged={onPathHighlightingChanged}
-      />
+      /> */}
       <NetworkGraph pathHighlighted={pathHighlighted} />
       <Footer />
     </div>
