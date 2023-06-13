@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import './Checkbox.scss';
 
@@ -40,7 +40,7 @@ const Checkbox = (props: CheckboxProps): JSX.Element => {
       {isChecked ? (
         <FontAwesomeIcon className="Checkbox-Icon check" icon={faCheck} />
       ) : (
-        <FontAwesomeIcon className="Checkbox-Icon cross" icon={faXmark} />
+        <FontAwesomeIcon className="Checkbox-Icon cross" icon={faTimes} />
       )}
       <div className="Checkbox-Label">{label}</div>
     </div>
