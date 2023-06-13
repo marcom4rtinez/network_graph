@@ -1,6 +1,6 @@
 import { Node, Edge, Path } from '../model/DbModel';
+import { apiEndpoint } from '../../configs/config'
 
-const apiEndpoint = "http://localhost:8080/"
 
 export async function fetchNodes(): Promise<Node[]> {
   const endpoint = 'getNodes';
